@@ -14,7 +14,8 @@ import {
   TouchableOpacity
 } from "react-native";
 import { bindActionCreators } from "redux";
-import { setNewNumber } from "./ducks/appData";
+import { setNewNumber } from "app/ducks/appData";
+import { Navigation } from "react-native-navigation";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -23,9 +24,12 @@ const instructions = Platform.select({
     "Shake or press menu button for dev menu"
 });
 
-type Props = {};
-class Content extends Component<Props> {
-  state = { click: 0 };
+// type Props = {};
+class Content extends Component {
+  constructor(props){
+    super(props);
+    this.state = { click: 0 };
+  }
 
   handleButtonClick = () => {
     const { setNewNumber, num } = this.props;
@@ -34,11 +38,11 @@ class Content extends Component<Props> {
 
   render() {
     const { num } = this.props;
+    console.log(this.props.navigation)
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>Hello World</Text>
         <Text style={styles.instructions}>{instructions}</Text>
         <TouchableOpacity onPress={() => this.handleButtonClick()}>
           <View style={{ backgroundColor: "orange", margin: "5%" }}>
